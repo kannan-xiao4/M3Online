@@ -44,7 +44,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 
-	pb "m3online/routeguide"
+	pb "m3online/rpc/sample"
 )
 
 var (
