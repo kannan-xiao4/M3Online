@@ -18,8 +18,9 @@ option java_multiple_files = true;
 option java_package = "io.grpc.examples.routeguide";
 option java_outer_classname = "RouteGuideProto";
 option objc_class_prefix = "RTG";
+option csharp_namespace = "Sample.RouteGuide";
 
-package routeguide;
+package sample.routeguide;
 
 // Interface exported by the server.
 service RouteGuide {
