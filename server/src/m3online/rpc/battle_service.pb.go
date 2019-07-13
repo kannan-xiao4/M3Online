@@ -6,12 +6,11 @@ package rpc
 import (
 	context "context"
 	fmt "fmt"
-	math "math"
-
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -103,27 +102,205 @@ func (m *EnterResponse) GetEnter() *Enter {
 	return nil
 }
 
+type ConnectionRequest struct {
+	UserName             string   `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
+	Enter                *Enter   `protobuf:"bytes,2,opt,name=enter,proto3" json:"enter,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ConnectionRequest) Reset()         { *m = ConnectionRequest{} }
+func (m *ConnectionRequest) String() string { return proto.CompactTextString(m) }
+func (*ConnectionRequest) ProtoMessage()    {}
+func (*ConnectionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c471dcc1ccdbdac8, []int{2}
+}
+
+func (m *ConnectionRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ConnectionRequest.Unmarshal(m, b)
+}
+func (m *ConnectionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ConnectionRequest.Marshal(b, m, deterministic)
+}
+func (m *ConnectionRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ConnectionRequest.Merge(m, src)
+}
+func (m *ConnectionRequest) XXX_Size() int {
+	return xxx_messageInfo_ConnectionRequest.Size(m)
+}
+func (m *ConnectionRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ConnectionRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ConnectionRequest proto.InternalMessageInfo
+
+func (m *ConnectionRequest) GetUserName() string {
+	if m != nil {
+		return m.UserName
+	}
+	return ""
+}
+
+func (m *ConnectionRequest) GetEnter() *Enter {
+	if m != nil {
+		return m.Enter
+	}
+	return nil
+}
+
+type EnemySituation struct {
+	Enemy                *Enemy   `protobuf:"bytes,1,opt,name=enemy,proto3" json:"enemy,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *EnemySituation) Reset()         { *m = EnemySituation{} }
+func (m *EnemySituation) String() string { return proto.CompactTextString(m) }
+func (*EnemySituation) ProtoMessage()    {}
+func (*EnemySituation) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c471dcc1ccdbdac8, []int{3}
+}
+
+func (m *EnemySituation) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_EnemySituation.Unmarshal(m, b)
+}
+func (m *EnemySituation) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_EnemySituation.Marshal(b, m, deterministic)
+}
+func (m *EnemySituation) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_EnemySituation.Merge(m, src)
+}
+func (m *EnemySituation) XXX_Size() int {
+	return xxx_messageInfo_EnemySituation.Size(m)
+}
+func (m *EnemySituation) XXX_DiscardUnknown() {
+	xxx_messageInfo_EnemySituation.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_EnemySituation proto.InternalMessageInfo
+
+func (m *EnemySituation) GetEnemy() *Enemy {
+	if m != nil {
+		return m.Enemy
+	}
+	return nil
+}
+
+type AttackRequest struct {
+	Attack               *Attack  `protobuf:"bytes,1,opt,name=attack,proto3" json:"attack,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AttackRequest) Reset()         { *m = AttackRequest{} }
+func (m *AttackRequest) String() string { return proto.CompactTextString(m) }
+func (*AttackRequest) ProtoMessage()    {}
+func (*AttackRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c471dcc1ccdbdac8, []int{4}
+}
+
+func (m *AttackRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AttackRequest.Unmarshal(m, b)
+}
+func (m *AttackRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AttackRequest.Marshal(b, m, deterministic)
+}
+func (m *AttackRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AttackRequest.Merge(m, src)
+}
+func (m *AttackRequest) XXX_Size() int {
+	return xxx_messageInfo_AttackRequest.Size(m)
+}
+func (m *AttackRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_AttackRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AttackRequest proto.InternalMessageInfo
+
+func (m *AttackRequest) GetAttack() *Attack {
+	if m != nil {
+		return m.Attack
+	}
+	return nil
+}
+
+type SessionSummary struct {
+	TotalAttack          int32    `protobuf:"varint,1,opt,name=totalAttack,proto3" json:"totalAttack,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *SessionSummary) Reset()         { *m = SessionSummary{} }
+func (m *SessionSummary) String() string { return proto.CompactTextString(m) }
+func (*SessionSummary) ProtoMessage()    {}
+func (*SessionSummary) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c471dcc1ccdbdac8, []int{5}
+}
+
+func (m *SessionSummary) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SessionSummary.Unmarshal(m, b)
+}
+func (m *SessionSummary) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SessionSummary.Marshal(b, m, deterministic)
+}
+func (m *SessionSummary) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SessionSummary.Merge(m, src)
+}
+func (m *SessionSummary) XXX_Size() int {
+	return xxx_messageInfo_SessionSummary.Size(m)
+}
+func (m *SessionSummary) XXX_DiscardUnknown() {
+	xxx_messageInfo_SessionSummary.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SessionSummary proto.InternalMessageInfo
+
+func (m *SessionSummary) GetTotalAttack() int32 {
+	if m != nil {
+		return m.TotalAttack
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*EnterRequest)(nil), "EnterRequest")
 	proto.RegisterType((*EnterResponse)(nil), "EnterResponse")
+	proto.RegisterType((*ConnectionRequest)(nil), "ConnectionRequest")
+	proto.RegisterType((*EnemySituation)(nil), "EnemySituation")
+	proto.RegisterType((*AttackRequest)(nil), "AttackRequest")
+	proto.RegisterType((*SessionSummary)(nil), "SessionSummary")
 }
 
 func init() { proto.RegisterFile("service/battle_service.proto", fileDescriptor_c471dcc1ccdbdac8) }
 
 var fileDescriptor_c471dcc1ccdbdac8 = []byte{
-	// 191 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x29, 0x4e, 0x2d, 0x2a,
-	0xcb, 0x4c, 0x4e, 0xd5, 0x4f, 0x4a, 0x2c, 0x29, 0xc9, 0x49, 0x8d, 0x87, 0x72, 0xf5, 0x0a, 0x8a,
-	0xf2, 0x4b, 0xf2, 0xa5, 0x84, 0x52, 0xf2, 0x73, 0x13, 0x33, 0xf3, 0xf4, 0x53, 0xf3, 0x4a, 0x52,
-	0x8b, 0x20, 0x62, 0x4a, 0x5a, 0x5c, 0x3c, 0xae, 0x20, 0x6e, 0x50, 0x6a, 0x61, 0x69, 0x6a, 0x71,
-	0x89, 0x90, 0x14, 0x17, 0x07, 0x44, 0xaf, 0x67, 0x8a, 0x04, 0xa3, 0x02, 0xa3, 0x06, 0x67, 0x10,
-	0x9c, 0xaf, 0xa4, 0xcb, 0xc5, 0x0b, 0x55, 0x5b, 0x5c, 0x90, 0x9f, 0x57, 0x9c, 0x2a, 0x24, 0xc3,
-	0xc5, 0x0a, 0x36, 0x0b, 0xac, 0x92, 0xdb, 0x88, 0x4d, 0x0f, 0x22, 0x0d, 0x11, 0x34, 0xb2, 0xe7,
-	0xe2, 0x75, 0x02, 0x6b, 0x0d, 0x86, 0xb8, 0x42, 0x48, 0x8f, 0x8b, 0x1b, 0xac, 0x00, 0x22, 0x2a,
-	0xc4, 0xab, 0x87, 0x6c, 0xb3, 0x14, 0x9f, 0x1e, 0x8a, 0xe1, 0x4a, 0x0c, 0x4e, 0x3a, 0x51, 0x3c,
-	0xb9, 0xc6, 0xf9, 0x79, 0x39, 0x99, 0x79, 0xa9, 0xfa, 0x45, 0x05, 0xc9, 0xab, 0x98, 0xa4, 0x7d,
-	0x8d, 0xfd, 0xc1, 0x5c, 0x3d, 0xf7, 0xa2, 0x82, 0x64, 0x3d, 0x14, 0xd3, 0x93, 0xd8, 0xc0, 0x1e,
-	0x32, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0x3b, 0xdf, 0x3c, 0x02, 0x04, 0x01, 0x00, 0x00,
+	// 352 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0x41, 0x8f, 0xda, 0x30,
+	0x10, 0x85, 0x09, 0x12, 0xa1, 0x0c, 0x24, 0xa8, 0xee, 0xa5, 0x0a, 0x48, 0x45, 0x3e, 0xa1, 0xaa,
+	0x18, 0x14, 0x7e, 0x01, 0x54, 0xa8, 0xea, 0xa1, 0x54, 0x4a, 0x6e, 0x7b, 0x41, 0x26, 0xcc, 0x21,
+	0x5a, 0x6c, 0x67, 0x13, 0x67, 0xa5, 0xfc, 0x9d, 0x3d, 0xee, 0xaf, 0x5c, 0x25, 0x36, 0xbb, 0x89,
+	0xd8, 0xe3, 0x7c, 0x1e, 0xbf, 0x97, 0xf7, 0x62, 0x98, 0x17, 0x98, 0x3f, 0xa7, 0x09, 0xae, 0xcf,
+	0x5c, 0xeb, 0x2b, 0x9e, 0xec, 0xc8, 0xb2, 0x5c, 0x69, 0x15, 0x90, 0x8b, 0x12, 0x3c, 0x95, 0x6b,
+	0x94, 0x1a, 0xf3, 0x3b, 0x86, 0xa2, 0xb2, 0xec, 0x9b, 0x65, 0x5c, 0x6b, 0x9e, 0x3c, 0x1a, 0x48,
+	0x7f, 0xc2, 0xe4, 0x50, 0xdf, 0x8b, 0xf0, 0xa9, 0xc4, 0x42, 0x93, 0x00, 0xbe, 0x18, 0x93, 0xbf,
+	0x97, 0xef, 0xce, 0xc2, 0x59, 0x8e, 0xa2, 0xf7, 0x99, 0xae, 0xc0, 0xb3, 0xbb, 0x45, 0xa6, 0x64,
+	0x81, 0x64, 0x0e, 0x83, 0xc6, 0xb4, 0xd9, 0x1c, 0x87, 0x2e, 0x33, 0xc7, 0x06, 0xd2, 0x23, 0x7c,
+	0xfd, 0xad, 0xa4, 0xc4, 0x44, 0xa7, 0x4a, 0xde, 0xf4, 0x67, 0x30, 0x2a, 0x0b, 0xcc, 0x4f, 0x92,
+	0x0b, 0xbc, 0x19, 0xd4, 0xe0, 0xc8, 0x45, 0x4b, 0xaf, 0xff, 0x99, 0x1e, 0x03, 0xff, 0x50, 0xc7,
+	0x89, 0x53, 0x5d, 0xf2, 0x5a, 0xd3, 0xec, 0xa3, 0xa8, 0x5a, 0xfe, 0x28, 0xaa, 0xc8, 0x40, 0xba,
+	0x01, 0x6f, 0xd7, 0x44, 0xbd, 0x79, 0xff, 0x00, 0xd7, 0x64, 0xb7, 0xfb, 0x43, 0x66, 0xcf, 0x2d,
+	0xa6, 0x21, 0xf8, 0x31, 0x16, 0x45, 0xaa, 0x64, 0x5c, 0x0a, 0xc1, 0xf3, 0x8a, 0x2c, 0x60, 0xac,
+	0x95, 0xe6, 0xd7, 0xdd, 0xc7, 0xbd, 0x41, 0xd4, 0x46, 0xe1, 0x8b, 0x03, 0xde, 0xbe, 0x69, 0x28,
+	0x36, 0x7f, 0x85, 0x30, 0x18, 0x37, 0xdf, 0x6d, 0x28, 0xf1, 0x58, 0xbb, 0xe0, 0xc0, 0x67, 0x9d,
+	0x0e, 0x69, 0x8f, 0x84, 0x30, 0xb4, 0x3d, 0x11, 0xc2, 0xee, 0x1a, 0x0b, 0xa6, 0xac, 0x9b, 0x9a,
+	0xf6, 0x36, 0x0e, 0x59, 0x81, 0x6b, 0xfc, 0x89, 0xcf, 0x3a, 0x21, 0x83, 0x29, 0xeb, 0x46, 0xa0,
+	0xbd, 0xa5, 0xb3, 0xff, 0xf5, 0x30, 0x11, 0x5b, 0x25, 0xaf, 0xa9, 0xc4, 0x75, 0x9e, 0x25, 0xaf,
+	0xfd, 0xd9, 0xbf, 0xed, 0xff, 0x66, 0x64, 0x7f, 0xf2, 0x2c, 0x61, 0x9d, 0x00, 0x67, 0xb7, 0x79,
+	0x1a, 0xdb, 0xb7, 0x00, 0x00, 0x00, 0xff, 0xff, 0xf4, 0x60, 0x88, 0x9d, 0x77, 0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -139,6 +316,8 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type BattleServiceClient interface {
 	EnterBattle(ctx context.Context, in *EnterRequest, opts ...grpc.CallOption) (*EnterResponse, error)
+	Connect(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (BattleService_ConnectClient, error)
+	Attack(ctx context.Context, opts ...grpc.CallOption) (BattleService_AttackClient, error)
 }
 
 type battleServiceClient struct {
@@ -158,9 +337,77 @@ func (c *battleServiceClient) EnterBattle(ctx context.Context, in *EnterRequest,
 	return out, nil
 }
 
+func (c *battleServiceClient) Connect(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (BattleService_ConnectClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_BattleService_serviceDesc.Streams[0], "/BattleService/Connect", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &battleServiceConnectClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type BattleService_ConnectClient interface {
+	Recv() (*EnemySituation, error)
+	grpc.ClientStream
+}
+
+type battleServiceConnectClient struct {
+	grpc.ClientStream
+}
+
+func (x *battleServiceConnectClient) Recv() (*EnemySituation, error) {
+	m := new(EnemySituation)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *battleServiceClient) Attack(ctx context.Context, opts ...grpc.CallOption) (BattleService_AttackClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_BattleService_serviceDesc.Streams[1], "/BattleService/Attack", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &battleServiceAttackClient{stream}
+	return x, nil
+}
+
+type BattleService_AttackClient interface {
+	Send(*AttackRequest) error
+	CloseAndRecv() (*SessionSummary, error)
+	grpc.ClientStream
+}
+
+type battleServiceAttackClient struct {
+	grpc.ClientStream
+}
+
+func (x *battleServiceAttackClient) Send(m *AttackRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *battleServiceAttackClient) CloseAndRecv() (*SessionSummary, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(SessionSummary)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BattleServiceServer is the server API for BattleService service.
 type BattleServiceServer interface {
 	EnterBattle(context.Context, *EnterRequest) (*EnterResponse, error)
+	Connect(*ConnectionRequest, BattleService_ConnectServer) error
+	Attack(BattleService_AttackServer) error
 }
 
 // UnimplementedBattleServiceServer can be embedded to have forward compatible implementations.
@@ -169,6 +416,12 @@ type UnimplementedBattleServiceServer struct {
 
 func (*UnimplementedBattleServiceServer) EnterBattle(ctx context.Context, req *EnterRequest) (*EnterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnterBattle not implemented")
+}
+func (*UnimplementedBattleServiceServer) Connect(req *ConnectionRequest, srv BattleService_ConnectServer) error {
+	return status.Errorf(codes.Unimplemented, "method Connect not implemented")
+}
+func (*UnimplementedBattleServiceServer) Attack(srv BattleService_AttackServer) error {
+	return status.Errorf(codes.Unimplemented, "method Attack not implemented")
 }
 
 func RegisterBattleServiceServer(s *grpc.Server, srv BattleServiceServer) {
@@ -193,6 +446,53 @@ func _BattleService_EnterBattle_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BattleService_Connect_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ConnectionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BattleServiceServer).Connect(m, &battleServiceConnectServer{stream})
+}
+
+type BattleService_ConnectServer interface {
+	Send(*EnemySituation) error
+	grpc.ServerStream
+}
+
+type battleServiceConnectServer struct {
+	grpc.ServerStream
+}
+
+func (x *battleServiceConnectServer) Send(m *EnemySituation) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _BattleService_Attack_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(BattleServiceServer).Attack(&battleServiceAttackServer{stream})
+}
+
+type BattleService_AttackServer interface {
+	SendAndClose(*SessionSummary) error
+	Recv() (*AttackRequest, error)
+	grpc.ServerStream
+}
+
+type battleServiceAttackServer struct {
+	grpc.ServerStream
+}
+
+func (x *battleServiceAttackServer) SendAndClose(m *SessionSummary) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *battleServiceAttackServer) Recv() (*AttackRequest, error) {
+	m := new(AttackRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _BattleService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "BattleService",
 	HandlerType: (*BattleServiceServer)(nil),
@@ -202,6 +502,17 @@ var _BattleService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _BattleService_EnterBattle_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Connect",
+			Handler:       _BattleService_Connect_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "Attack",
+			Handler:       _BattleService_Attack_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "service/battle_service.proto",
 }

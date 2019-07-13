@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option go_package = "m3online/rpc";
+option csharp_namespace = "M3Online.Domain.Enemy";
+
+message Enemy {
+    uint32 instant_id = 1;
+    uint32 master_id = 2;
+    string name = 3;
+    int32 hp = 4;
+}

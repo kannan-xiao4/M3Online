@@ -4,11 +4,13 @@ option go_package = "m3online/rpc";
 option csharp_namespace = "M3Online.Grpc.BattleService";
 
 import "domain/enter.proto";
+import "domain/enemy.proto";
+import "domain/attack.proto";
 
 service BattleService {
   rpc EnterBattle(EnterRequest) returns (EnterResponse) {}
-//  rpc Connect(Rectangle) returns (stream Feature) {}
-//  rpc Attack(stream Point) returns (RouteSummary) {}
+  rpc Connect(ConnectionRequest) returns (stream EnemySituation) {}
+  rpc Attack(stream AttackRequest) returns (SessionSummary) {}
 }
 
 message EnterRequest {
@@ -17,4 +19,21 @@ message EnterRequest {
 
 message EnterResponse {
   Enter enter = 1;
+}
+
+message ConnectionRequest {
+  string user_name = 1;
+  Enter enter = 2;
+}
+
+message EnemySituation {
+  Enemy enemy = 1;
+}
+
+message AttackRequest {
+  Attack attack = 1;
+}
+
+message SessionSummary {
+  int32 totalAttack = 1;
 }

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option go_package = "m3online/rpc";
+option csharp_namespace = "M3Online.Domain.Attack";
+
+import "domain/enter.proto";
+import "domain/enemy.proto";
+
+message Attack {
+    Enter enter = 1;
+    Enemy attack_enemy = 2;
+}
