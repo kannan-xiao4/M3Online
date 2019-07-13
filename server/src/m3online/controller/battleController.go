@@ -6,10 +6,11 @@ import (
 	"log"
 	"m3online/rpc"
 	"m3online/service"
+	"time"
 )
 
 type BattleController struct {
-	enemyService *service.EnemyService
+	EnemyService *service.EnemyService
 }
 
 var entryCount = uint32(0)
@@ -25,15 +26,16 @@ func (BattleController) EnterBattle(context.Context, *rpc.EnterRequest) (*rpc.En
 
 func (controller BattleController) Connect(request *rpc.ConnectionRequest, stream rpc.BattleService_ConnectServer) error {
 	//ToDO: ConnectionRequestCheck
-
 	for {
+		time.Sleep(1 * time.Second)
+
 		if false { // ToDo CheckConnectionBreak
 			break
 		}
 		if false { //ToDo CheckDiff Also Check Dirty
 			continue
 		}
-		enemy, _ := controller.enemyService.GetEnemy()
+		enemy, _ := controller.EnemyService.GetEnemy()
 		var situation = &rpc.EnemySituation{Enemy: enemy}
 		if err := stream.Send(situation); err != nil {
 			return err
@@ -54,7 +56,7 @@ func (controller BattleController) Attack(stream rpc.BattleService_AttackServer)
 		}
 
 		//ToDo: AttackRequestCheck
-		err = controller.enemyService.AttackEnemy(attackRequest.Attack)
+		err = controller.EnemyService.AttackEnemy(attackRequest.Attack)
 		if err != nil {
 			log.Printf("Error:%s", err)
 		}

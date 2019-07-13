@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
+	"m3online/service"
 	"net"
 
 	"google.golang.org/grpc/credentials"
@@ -15,10 +16,10 @@ import (
 )
 
 var (
-	tls        = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
-	certFile   = flag.String("cert_file", "", "The TLS cert file")
-	keyFile    = flag.String("key_file", "", "The TLS key file")
-	port       = flag.Int("port", 10000, "The server port")
+	tls      = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
+	certFile = flag.String("cert_file", "", "The TLS cert file")
+	keyFile  = flag.String("key_file", "", "The TLS key file")
+	port     = flag.Int("port", 10000, "The server port")
 )
 
 func serialize(enter *pb.Enter) string {
@@ -26,7 +27,10 @@ func serialize(enter *pb.Enter) string {
 }
 
 func newServer() *controller.BattleController {
-	s := &controller.BattleController{}
+	var es = &service.EnemyService{}
+	es.Initialize()
+
+	s := &controller.BattleController{EnemyService: es}
 	return s
 }
 
