@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "m3online/rpc";
+option csharp_namespace = "M3Online.Grpc.BattleService";
+
+import "domain/enter.proto";
+
+service BattleService {
+  rpc EnterBattle(EnterRequest) returns (EnterResponse) {}
+//  rpc Connect(Rectangle) returns (stream Feature) {}
+//  rpc Attack(stream Point) returns (RouteSummary) {}
+}
+
+message EnterRequest {
+  string battleId = 1;
+}
+
+message EnterResponse {
+  Enter enter = 1;
+}

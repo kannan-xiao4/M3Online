@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option go_package = "m3online/rpc";
+option csharp_namespace = "M3Online.Domain.Enter";
+
+message Enter {
+    uint32 enter_id = 1;
+}
