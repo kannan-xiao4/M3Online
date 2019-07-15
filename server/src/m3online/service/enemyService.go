@@ -14,7 +14,7 @@ type EnemyService struct {
 }
 
 func (EnemyService) Initialize() error {
-	currentEnemy.InstantId = uint32(0)
+	currentEnemy.InstantId = 0
 	currentEnemy.MasterId = masterId
 	currentEnemy.Name = enemyName
 	currentEnemy.Hp = enemyMaxHp

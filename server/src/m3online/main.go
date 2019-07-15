@@ -29,8 +29,9 @@ func serialize(enter *pb.Enter) string {
 func newServer() *controller.BattleController {
 	var es = &service.EnemyService{}
 	es.Initialize()
+	var us = &service.UserListService{}
 
-	s := &controller.BattleController{EnemyService: es}
+	s := &controller.BattleController{EnemyService: es, UserService: us}
 	return s
 }
 

@@ -18,6 +18,9 @@ namespace M3Online.Grpc.BattleService {
     static readonly grpc::Marshaller<global::M3Online.Grpc.BattleService.EnemySituation> __Marshaller_EnemySituation = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::M3Online.Grpc.BattleService.EnemySituation.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::M3Online.Grpc.BattleService.AttackRequest> __Marshaller_AttackRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::M3Online.Grpc.BattleService.AttackRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::M3Online.Grpc.BattleService.SessionSummary> __Marshaller_SessionSummary = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::M3Online.Grpc.BattleService.SessionSummary.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::M3Online.Grpc.BattleService.UserList> __Marshaller_UserList = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::M3Online.Grpc.BattleService.UserList.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::M3Online.Grpc.BattleService.ExitRequest> __Marshaller_ExitRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::M3Online.Grpc.BattleService.ExitRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::M3Online.Grpc.BattleService.ExitResponse> __Marshaller_ExitResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::M3Online.Grpc.BattleService.ExitResponse.Parser.ParseFrom);
 
     static readonly grpc::Method<global::M3Online.Grpc.BattleService.EnterRequest, global::M3Online.Grpc.BattleService.EnterResponse> __Method_EnterBattle = new grpc::Method<global::M3Online.Grpc.BattleService.EnterRequest, global::M3Online.Grpc.BattleService.EnterResponse>(
         grpc::MethodType.Unary,
@@ -40,6 +43,20 @@ namespace M3Online.Grpc.BattleService {
         __Marshaller_AttackRequest,
         __Marshaller_SessionSummary);
 
+    static readonly grpc::Method<global::M3Online.Grpc.BattleService.ConnectionRequest, global::M3Online.Grpc.BattleService.UserList> __Method_ReceiveUsers = new grpc::Method<global::M3Online.Grpc.BattleService.ConnectionRequest, global::M3Online.Grpc.BattleService.UserList>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "ReceiveUsers",
+        __Marshaller_ConnectionRequest,
+        __Marshaller_UserList);
+
+    static readonly grpc::Method<global::M3Online.Grpc.BattleService.ExitRequest, global::M3Online.Grpc.BattleService.ExitResponse> __Method_Exit = new grpc::Method<global::M3Online.Grpc.BattleService.ExitRequest, global::M3Online.Grpc.BattleService.ExitResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Exit",
+        __Marshaller_ExitRequest,
+        __Marshaller_ExitResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -61,6 +78,16 @@ namespace M3Online.Grpc.BattleService {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::M3Online.Grpc.BattleService.SessionSummary> Attack(grpc::IAsyncStreamReader<global::M3Online.Grpc.BattleService.AttackRequest> requestStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task ReceiveUsers(global::M3Online.Grpc.BattleService.ConnectionRequest request, grpc::IServerStreamWriter<global::M3Online.Grpc.BattleService.UserList> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::M3Online.Grpc.BattleService.ExitResponse> Exit(global::M3Online.Grpc.BattleService.ExitRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -122,6 +149,30 @@ namespace M3Online.Grpc.BattleService {
       {
         return CallInvoker.AsyncClientStreamingCall(__Method_Attack, null, options);
       }
+      public virtual grpc::AsyncServerStreamingCall<global::M3Online.Grpc.BattleService.UserList> ReceiveUsers(global::M3Online.Grpc.BattleService.ConnectionRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ReceiveUsers(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::M3Online.Grpc.BattleService.UserList> ReceiveUsers(global::M3Online.Grpc.BattleService.ConnectionRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_ReceiveUsers, null, options, request);
+      }
+      public virtual global::M3Online.Grpc.BattleService.ExitResponse Exit(global::M3Online.Grpc.BattleService.ExitRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Exit(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::M3Online.Grpc.BattleService.ExitResponse Exit(global::M3Online.Grpc.BattleService.ExitRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Exit, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::M3Online.Grpc.BattleService.ExitResponse> ExitAsync(global::M3Online.Grpc.BattleService.ExitRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ExitAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::M3Online.Grpc.BattleService.ExitResponse> ExitAsync(global::M3Online.Grpc.BattleService.ExitRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Exit, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override BattleServiceClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -136,7 +187,9 @@ namespace M3Online.Grpc.BattleService {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_EnterBattle, serviceImpl.EnterBattle)
           .AddMethod(__Method_Connect, serviceImpl.Connect)
-          .AddMethod(__Method_Attack, serviceImpl.Attack).Build();
+          .AddMethod(__Method_Attack, serviceImpl.Attack)
+          .AddMethod(__Method_ReceiveUsers, serviceImpl.ReceiveUsers)
+          .AddMethod(__Method_Exit, serviceImpl.Exit).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -148,6 +201,8 @@ namespace M3Online.Grpc.BattleService {
       serviceBinder.AddMethod(__Method_EnterBattle, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::M3Online.Grpc.BattleService.EnterRequest, global::M3Online.Grpc.BattleService.EnterResponse>(serviceImpl.EnterBattle));
       serviceBinder.AddMethod(__Method_Connect, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::M3Online.Grpc.BattleService.ConnectionRequest, global::M3Online.Grpc.BattleService.EnemySituation>(serviceImpl.Connect));
       serviceBinder.AddMethod(__Method_Attack, serviceImpl == null ? null : new grpc::ClientStreamingServerMethod<global::M3Online.Grpc.BattleService.AttackRequest, global::M3Online.Grpc.BattleService.SessionSummary>(serviceImpl.Attack));
+      serviceBinder.AddMethod(__Method_ReceiveUsers, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::M3Online.Grpc.BattleService.ConnectionRequest, global::M3Online.Grpc.BattleService.UserList>(serviceImpl.ReceiveUsers));
+      serviceBinder.AddMethod(__Method_Exit, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::M3Online.Grpc.BattleService.ExitRequest, global::M3Online.Grpc.BattleService.ExitResponse>(serviceImpl.Exit));
     }
 
   }

@@ -24,8 +24,37 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type ResultCode int32
+
+const (
+	ResultCode_UNKNOWN ResultCode = 0
+	ResultCode_SUCCESS ResultCode = 1
+	ResultCode_ERROR   ResultCode = 2
+)
+
+var ResultCode_name = map[int32]string{
+	0: "UNKNOWN",
+	1: "SUCCESS",
+	2: "ERROR",
+}
+
+var ResultCode_value = map[string]int32{
+	"UNKNOWN": 0,
+	"SUCCESS": 1,
+	"ERROR":   2,
+}
+
+func (x ResultCode) String() string {
+	return proto.EnumName(ResultCode_name, int32(x))
+}
+
+func (ResultCode) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_c471dcc1ccdbdac8, []int{0}
+}
+
 type EnterRequest struct {
 	BattleId             string   `protobuf:"bytes,1,opt,name=battleId,proto3" json:"battleId,omitempty"`
+	UserName             string   `protobuf:"bytes,2,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -59,6 +88,13 @@ var xxx_messageInfo_EnterRequest proto.InternalMessageInfo
 func (m *EnterRequest) GetBattleId() string {
 	if m != nil {
 		return m.BattleId
+	}
+	return ""
+}
+
+func (m *EnterRequest) GetUserName() string {
+	if m != nil {
+		return m.UserName
 	}
 	return ""
 }
@@ -103,8 +139,7 @@ func (m *EnterResponse) GetEnter() *Enter {
 }
 
 type ConnectionRequest struct {
-	UserName             string   `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
-	Enter                *Enter   `protobuf:"bytes,2,opt,name=enter,proto3" json:"enter,omitempty"`
+	Enter                *Enter   `protobuf:"bytes,1,opt,name=enter,proto3" json:"enter,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -134,13 +169,6 @@ func (m *ConnectionRequest) XXX_DiscardUnknown() {
 }
 
 var xxx_messageInfo_ConnectionRequest proto.InternalMessageInfo
-
-func (m *ConnectionRequest) GetUserName() string {
-	if m != nil {
-		return m.UserName
-	}
-	return ""
-}
 
 func (m *ConnectionRequest) GetEnter() *Enter {
 	if m != nil {
@@ -266,41 +294,175 @@ func (m *SessionSummary) GetTotalAttack() int32 {
 	return 0
 }
 
+type UserList struct {
+	UserMap              map[uint32]*User `protobuf:"bytes,1,rep,name=user_map,json=userMap,proto3" json:"user_map,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *UserList) Reset()         { *m = UserList{} }
+func (m *UserList) String() string { return proto.CompactTextString(m) }
+func (*UserList) ProtoMessage()    {}
+func (*UserList) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c471dcc1ccdbdac8, []int{6}
+}
+
+func (m *UserList) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UserList.Unmarshal(m, b)
+}
+func (m *UserList) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UserList.Marshal(b, m, deterministic)
+}
+func (m *UserList) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UserList.Merge(m, src)
+}
+func (m *UserList) XXX_Size() int {
+	return xxx_messageInfo_UserList.Size(m)
+}
+func (m *UserList) XXX_DiscardUnknown() {
+	xxx_messageInfo_UserList.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UserList proto.InternalMessageInfo
+
+func (m *UserList) GetUserMap() map[uint32]*User {
+	if m != nil {
+		return m.UserMap
+	}
+	return nil
+}
+
+type ExitRequest struct {
+	Enter                *Enter   `protobuf:"bytes,1,opt,name=enter,proto3" json:"enter,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ExitRequest) Reset()         { *m = ExitRequest{} }
+func (m *ExitRequest) String() string { return proto.CompactTextString(m) }
+func (*ExitRequest) ProtoMessage()    {}
+func (*ExitRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c471dcc1ccdbdac8, []int{7}
+}
+
+func (m *ExitRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ExitRequest.Unmarshal(m, b)
+}
+func (m *ExitRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ExitRequest.Marshal(b, m, deterministic)
+}
+func (m *ExitRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ExitRequest.Merge(m, src)
+}
+func (m *ExitRequest) XXX_Size() int {
+	return xxx_messageInfo_ExitRequest.Size(m)
+}
+func (m *ExitRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ExitRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ExitRequest proto.InternalMessageInfo
+
+func (m *ExitRequest) GetEnter() *Enter {
+	if m != nil {
+		return m.Enter
+	}
+	return nil
+}
+
+type ExitResponse struct {
+	Result               ResultCode `protobuf:"varint,1,opt,name=result,proto3,enum=ResultCode" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *ExitResponse) Reset()         { *m = ExitResponse{} }
+func (m *ExitResponse) String() string { return proto.CompactTextString(m) }
+func (*ExitResponse) ProtoMessage()    {}
+func (*ExitResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c471dcc1ccdbdac8, []int{8}
+}
+
+func (m *ExitResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ExitResponse.Unmarshal(m, b)
+}
+func (m *ExitResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ExitResponse.Marshal(b, m, deterministic)
+}
+func (m *ExitResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ExitResponse.Merge(m, src)
+}
+func (m *ExitResponse) XXX_Size() int {
+	return xxx_messageInfo_ExitResponse.Size(m)
+}
+func (m *ExitResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ExitResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ExitResponse proto.InternalMessageInfo
+
+func (m *ExitResponse) GetResult() ResultCode {
+	if m != nil {
+		return m.Result
+	}
+	return ResultCode_UNKNOWN
+}
+
 func init() {
+	proto.RegisterEnum("ResultCode", ResultCode_name, ResultCode_value)
 	proto.RegisterType((*EnterRequest)(nil), "EnterRequest")
 	proto.RegisterType((*EnterResponse)(nil), "EnterResponse")
 	proto.RegisterType((*ConnectionRequest)(nil), "ConnectionRequest")
 	proto.RegisterType((*EnemySituation)(nil), "EnemySituation")
 	proto.RegisterType((*AttackRequest)(nil), "AttackRequest")
 	proto.RegisterType((*SessionSummary)(nil), "SessionSummary")
+	proto.RegisterType((*UserList)(nil), "UserList")
+	proto.RegisterMapType((map[uint32]*User)(nil), "UserList.UserMapEntry")
+	proto.RegisterType((*ExitRequest)(nil), "ExitRequest")
+	proto.RegisterType((*ExitResponse)(nil), "ExitResponse")
 }
 
 func init() { proto.RegisterFile("service/battle_service.proto", fileDescriptor_c471dcc1ccdbdac8) }
 
 var fileDescriptor_c471dcc1ccdbdac8 = []byte{
-	// 352 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0x41, 0x8f, 0xda, 0x30,
-	0x10, 0x85, 0x09, 0x12, 0xa1, 0x0c, 0x24, 0xa8, 0xee, 0xa5, 0x0a, 0x48, 0x45, 0x3e, 0xa1, 0xaa,
-	0x18, 0x14, 0x7e, 0x01, 0x54, 0xa8, 0xea, 0xa1, 0x54, 0x4a, 0x6e, 0x7b, 0x41, 0x26, 0xcc, 0x21,
-	0x5a, 0x6c, 0x67, 0x13, 0x67, 0xa5, 0xfc, 0x9d, 0x3d, 0xee, 0xaf, 0x5c, 0x25, 0x36, 0xbb, 0x89,
-	0xd8, 0xe3, 0x7c, 0x1e, 0xbf, 0x97, 0xf7, 0x62, 0x98, 0x17, 0x98, 0x3f, 0xa7, 0x09, 0xae, 0xcf,
-	0x5c, 0xeb, 0x2b, 0x9e, 0xec, 0xc8, 0xb2, 0x5c, 0x69, 0x15, 0x90, 0x8b, 0x12, 0x3c, 0x95, 0x6b,
-	0x94, 0x1a, 0xf3, 0x3b, 0x86, 0xa2, 0xb2, 0xec, 0x9b, 0x65, 0x5c, 0x6b, 0x9e, 0x3c, 0x1a, 0x48,
-	0x7f, 0xc2, 0xe4, 0x50, 0xdf, 0x8b, 0xf0, 0xa9, 0xc4, 0x42, 0x93, 0x00, 0xbe, 0x18, 0x93, 0xbf,
-	0x97, 0xef, 0xce, 0xc2, 0x59, 0x8e, 0xa2, 0xf7, 0x99, 0xae, 0xc0, 0xb3, 0xbb, 0x45, 0xa6, 0x64,
-	0x81, 0x64, 0x0e, 0x83, 0xc6, 0xb4, 0xd9, 0x1c, 0x87, 0x2e, 0x33, 0xc7, 0x06, 0xd2, 0x23, 0x7c,
-	0xfd, 0xad, 0xa4, 0xc4, 0x44, 0xa7, 0x4a, 0xde, 0xf4, 0x67, 0x30, 0x2a, 0x0b, 0xcc, 0x4f, 0x92,
-	0x0b, 0xbc, 0x19, 0xd4, 0xe0, 0xc8, 0x45, 0x4b, 0xaf, 0xff, 0x99, 0x1e, 0x03, 0xff, 0x50, 0xc7,
-	0x89, 0x53, 0x5d, 0xf2, 0x5a, 0xd3, 0xec, 0xa3, 0xa8, 0x5a, 0xfe, 0x28, 0xaa, 0xc8, 0x40, 0xba,
-	0x01, 0x6f, 0xd7, 0x44, 0xbd, 0x79, 0xff, 0x00, 0xd7, 0x64, 0xb7, 0xfb, 0x43, 0x66, 0xcf, 0x2d,
-	0xa6, 0x21, 0xf8, 0x31, 0x16, 0x45, 0xaa, 0x64, 0x5c, 0x0a, 0xc1, 0xf3, 0x8a, 0x2c, 0x60, 0xac,
-	0x95, 0xe6, 0xd7, 0xdd, 0xc7, 0xbd, 0x41, 0xd4, 0x46, 0xe1, 0x8b, 0x03, 0xde, 0xbe, 0x69, 0x28,
-	0x36, 0x7f, 0x85, 0x30, 0x18, 0x37, 0xdf, 0x6d, 0x28, 0xf1, 0x58, 0xbb, 0xe0, 0xc0, 0x67, 0x9d,
-	0x0e, 0x69, 0x8f, 0x84, 0x30, 0xb4, 0x3d, 0x11, 0xc2, 0xee, 0x1a, 0x0b, 0xa6, 0xac, 0x9b, 0x9a,
-	0xf6, 0x36, 0x0e, 0x59, 0x81, 0x6b, 0xfc, 0x89, 0xcf, 0x3a, 0x21, 0x83, 0x29, 0xeb, 0x46, 0xa0,
-	0xbd, 0xa5, 0xb3, 0xff, 0xf5, 0x30, 0x11, 0x5b, 0x25, 0xaf, 0xa9, 0xc4, 0x75, 0x9e, 0x25, 0xaf,
-	0xfd, 0xd9, 0xbf, 0xed, 0xff, 0x66, 0x64, 0x7f, 0xf2, 0x2c, 0x61, 0x9d, 0x00, 0x67, 0xb7, 0x79,
-	0x1a, 0xdb, 0xb7, 0x00, 0x00, 0x00, 0xff, 0xff, 0xf4, 0x60, 0x88, 0x9d, 0x77, 0x02, 0x00, 0x00,
+	// 542 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x93, 0x4d, 0x6b, 0xdb, 0x4c,
+	0x10, 0xc7, 0x2d, 0xe7, 0xb1, 0x1d, 0x8f, 0x24, 0xc7, 0xd9, 0x07, 0x4a, 0x90, 0x03, 0x35, 0x2a,
+	0x05, 0xd3, 0x36, 0xeb, 0x58, 0xbe, 0x94, 0xde, 0x1c, 0x23, 0x42, 0x69, 0x63, 0xc3, 0x0a, 0x53,
+	0xe8, 0xc5, 0x6c, 0xe4, 0x39, 0x88, 0x58, 0x2f, 0x95, 0x56, 0xa6, 0xbe, 0xf5, 0xf3, 0xf4, 0x33,
+	0xf6, 0x50, 0xb4, 0xbb, 0x4e, 0x64, 0x52, 0x4a, 0x6f, 0x9a, 0xdf, 0xbc, 0xec, 0xee, 0x7f, 0xfe,
+	0x82, 0xcb, 0x02, 0xf3, 0x5d, 0x14, 0xe2, 0xf8, 0x9e, 0x0b, 0xb1, 0xc5, 0xb5, 0x0e, 0x69, 0x96,
+	0xa7, 0x22, 0x75, 0xc8, 0x26, 0x8d, 0x79, 0x94, 0x8c, 0x31, 0x11, 0x98, 0x3f, 0x63, 0x18, 0xef,
+	0x35, 0xfb, 0x5f, 0x33, 0x2e, 0x04, 0x0f, 0x1f, 0x34, 0x3c, 0xd7, 0xb0, 0x2c, 0x0e, 0xbd, 0xee,
+	0x2d, 0x58, 0x7e, 0x35, 0x8a, 0xe1, 0xb7, 0x12, 0x0b, 0x41, 0x1c, 0x38, 0x55, 0xe7, 0x7e, 0xdc,
+	0x5c, 0x18, 0x43, 0x63, 0xd4, 0x65, 0x8f, 0x31, 0x19, 0x40, 0xb7, 0xea, 0x5c, 0x27, 0x3c, 0xc6,
+	0x8b, 0xa6, 0x4a, 0x56, 0x60, 0xc1, 0x63, 0x74, 0xaf, 0xc0, 0xd6, 0x83, 0x8a, 0x2c, 0x4d, 0x0a,
+	0x24, 0x97, 0xd0, 0x92, 0x97, 0x94, 0x63, 0x4c, 0xaf, 0x4d, 0x55, 0x5a, 0x41, 0x77, 0x02, 0xe7,
+	0xf3, 0x34, 0x49, 0x30, 0x14, 0x51, 0x9a, 0x1c, 0x0e, 0xff, 0x7b, 0x0b, 0x85, 0x9e, 0x5f, 0xbd,
+	0x30, 0x88, 0x44, 0xc9, 0xab, 0x36, 0x55, 0x8f, 0xf1, 0xbe, 0x56, 0x8f, 0xf1, 0x9e, 0x29, 0xe8,
+	0x5e, 0x83, 0x3d, 0x93, 0xaf, 0x3f, 0x8c, 0x7f, 0x09, 0x6d, 0x25, 0x87, 0xae, 0xef, 0x50, 0x9d,
+	0xd7, 0xd8, 0xf5, 0xa0, 0x17, 0x60, 0x51, 0x44, 0x69, 0x12, 0x94, 0x71, 0xcc, 0xf3, 0x3d, 0x19,
+	0x82, 0x29, 0x52, 0xc1, 0xb7, 0xb3, 0xa7, 0xbe, 0x16, 0xab, 0x23, 0xf7, 0x87, 0x01, 0xa7, 0xab,
+	0x02, 0xf3, 0xcf, 0x51, 0x21, 0xc8, 0x04, 0xa4, 0x20, 0xeb, 0x98, 0x67, 0x17, 0xc6, 0xf0, 0x64,
+	0x64, 0x7a, 0x2f, 0xe8, 0x21, 0x29, 0x3f, 0xee, 0x78, 0xe6, 0x27, 0x22, 0xdf, 0xb3, 0x4e, 0xa9,
+	0x22, 0x67, 0x06, 0x56, 0x3d, 0x41, 0xfa, 0x70, 0xf2, 0x80, 0xea, 0x45, 0x36, 0xab, 0x3e, 0xc9,
+	0x00, 0x5a, 0x3b, 0xbe, 0x2d, 0x95, 0xe4, 0xa6, 0xd7, 0x92, 0x83, 0x98, 0x62, 0x1f, 0x9a, 0xef,
+	0x0d, 0xf7, 0x2d, 0x98, 0xfe, 0xf7, 0x48, 0xfc, 0x9b, 0x8a, 0x53, 0xb0, 0x54, 0xb1, 0x5e, 0xd3,
+	0x2b, 0x68, 0xe7, 0x58, 0x94, 0x5b, 0x21, 0xcb, 0x7b, 0x9e, 0x49, 0x99, 0x0c, 0xe7, 0xe9, 0x06,
+	0x99, 0x4e, 0xbd, 0x99, 0x00, 0x3c, 0x51, 0x62, 0x42, 0x67, 0xb5, 0xf8, 0xb4, 0x58, 0x7e, 0x59,
+	0xf4, 0x1b, 0x55, 0x10, 0xac, 0xe6, 0x73, 0x3f, 0x08, 0xfa, 0x06, 0xe9, 0x42, 0xcb, 0x67, 0x6c,
+	0xc9, 0xfa, 0x4d, 0xef, 0x97, 0x01, 0xf6, 0x8d, 0x74, 0x4e, 0xa0, 0x0c, 0x4c, 0x28, 0x98, 0xf2,
+	0x26, 0x8a, 0x12, 0x9b, 0xd6, 0x8d, 0xe7, 0xf4, 0xe8, 0x91, 0x7d, 0xdc, 0x06, 0xf1, 0xa0, 0xa3,
+	0x2d, 0x42, 0x08, 0x7d, 0x66, 0x16, 0xe7, 0x8c, 0x1e, 0xbb, 0xc1, 0x6d, 0x5c, 0x1b, 0xe4, 0x0a,
+	0xda, 0x6a, 0x2f, 0xa4, 0x47, 0x8f, 0x96, 0xef, 0x9c, 0xd1, 0xe3, 0xd5, 0xba, 0x8d, 0x91, 0x41,
+	0x26, 0x60, 0x31, 0x0c, 0x31, 0xda, 0x61, 0xa5, 0x69, 0xf1, 0xc7, 0x73, 0xba, 0x8f, 0x1b, 0x94,
+	0x27, 0xbc, 0x86, 0xff, 0x2a, 0xfd, 0x88, 0x45, 0x6b, 0x9a, 0x3b, 0x36, 0xad, 0x8b, 0xea, 0x36,
+	0x6e, 0xde, 0x7d, 0xb5, 0xe2, 0x69, 0x9a, 0x6c, 0xa3, 0x04, 0xc7, 0x79, 0x16, 0xfe, 0x6c, 0x0e,
+	0xee, 0xa6, 0x4b, 0x19, 0xd2, 0xdb, 0x3c, 0x0b, 0xe9, 0x91, 0x34, 0xf7, 0x6d, 0xf9, 0x33, 0x4e,
+	0x7f, 0x07, 0x00, 0x00, 0xff, 0xff, 0xce, 0x84, 0x56, 0xd0, 0xfc, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -318,6 +480,8 @@ type BattleServiceClient interface {
 	EnterBattle(ctx context.Context, in *EnterRequest, opts ...grpc.CallOption) (*EnterResponse, error)
 	Connect(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (BattleService_ConnectClient, error)
 	Attack(ctx context.Context, opts ...grpc.CallOption) (BattleService_AttackClient, error)
+	ReceiveUsers(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (BattleService_ReceiveUsersClient, error)
+	Exit(ctx context.Context, in *ExitRequest, opts ...grpc.CallOption) (*ExitResponse, error)
 }
 
 type battleServiceClient struct {
@@ -403,11 +567,54 @@ func (x *battleServiceAttackClient) CloseAndRecv() (*SessionSummary, error) {
 	return m, nil
 }
 
+func (c *battleServiceClient) ReceiveUsers(ctx context.Context, in *ConnectionRequest, opts ...grpc.CallOption) (BattleService_ReceiveUsersClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_BattleService_serviceDesc.Streams[2], "/BattleService/ReceiveUsers", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &battleServiceReceiveUsersClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type BattleService_ReceiveUsersClient interface {
+	Recv() (*UserList, error)
+	grpc.ClientStream
+}
+
+type battleServiceReceiveUsersClient struct {
+	grpc.ClientStream
+}
+
+func (x *battleServiceReceiveUsersClient) Recv() (*UserList, error) {
+	m := new(UserList)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *battleServiceClient) Exit(ctx context.Context, in *ExitRequest, opts ...grpc.CallOption) (*ExitResponse, error) {
+	out := new(ExitResponse)
+	err := c.cc.Invoke(ctx, "/BattleService/Exit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BattleServiceServer is the server API for BattleService service.
 type BattleServiceServer interface {
 	EnterBattle(context.Context, *EnterRequest) (*EnterResponse, error)
 	Connect(*ConnectionRequest, BattleService_ConnectServer) error
 	Attack(BattleService_AttackServer) error
+	ReceiveUsers(*ConnectionRequest, BattleService_ReceiveUsersServer) error
+	Exit(context.Context, *ExitRequest) (*ExitResponse, error)
 }
 
 // UnimplementedBattleServiceServer can be embedded to have forward compatible implementations.
@@ -422,6 +629,12 @@ func (*UnimplementedBattleServiceServer) Connect(req *ConnectionRequest, srv Bat
 }
 func (*UnimplementedBattleServiceServer) Attack(srv BattleService_AttackServer) error {
 	return status.Errorf(codes.Unimplemented, "method Attack not implemented")
+}
+func (*UnimplementedBattleServiceServer) ReceiveUsers(req *ConnectionRequest, srv BattleService_ReceiveUsersServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReceiveUsers not implemented")
+}
+func (*UnimplementedBattleServiceServer) Exit(ctx context.Context, req *ExitRequest) (*ExitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Exit not implemented")
 }
 
 func RegisterBattleServiceServer(s *grpc.Server, srv BattleServiceServer) {
@@ -493,6 +706,45 @@ func (x *battleServiceAttackServer) Recv() (*AttackRequest, error) {
 	return m, nil
 }
 
+func _BattleService_ReceiveUsers_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ConnectionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BattleServiceServer).ReceiveUsers(m, &battleServiceReceiveUsersServer{stream})
+}
+
+type BattleService_ReceiveUsersServer interface {
+	Send(*UserList) error
+	grpc.ServerStream
+}
+
+type battleServiceReceiveUsersServer struct {
+	grpc.ServerStream
+}
+
+func (x *battleServiceReceiveUsersServer) Send(m *UserList) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _BattleService_Exit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BattleServiceServer).Exit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/BattleService/Exit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BattleServiceServer).Exit(ctx, req.(*ExitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _BattleService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "BattleService",
 	HandlerType: (*BattleServiceServer)(nil),
@@ -500,6 +752,10 @@ var _BattleService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "EnterBattle",
 			Handler:    _BattleService_EnterBattle_Handler,
+		},
+		{
+			MethodName: "Exit",
+			Handler:    _BattleService_Exit_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
@@ -512,6 +768,11 @@ var _BattleService_serviceDesc = grpc.ServiceDesc{
 			StreamName:    "Attack",
 			Handler:       _BattleService_Attack_Handler,
 			ClientStreams: true,
+		},
+		{
+			StreamName:    "ReceiveUsers",
+			Handler:       _BattleService_ReceiveUsers_Handler,
+			ServerStreams: true,
 		},
 	},
 	Metadata: "service/battle_service.proto",

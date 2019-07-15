@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "m3online/rpc";
+option csharp_namespace = "M3Online.Domain.User";
+
+message UserId {
+    string user_id = 1;
+}
+
+message User {
+    UserId id = 1;
+    string user_name = 2;
+}

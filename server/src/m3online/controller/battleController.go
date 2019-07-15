@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"github.com/google/uuid"
 	"io"
 	"log"
 	"m3online/rpc"
@@ -11,25 +12,30 @@ import (
 
 type BattleController struct {
 	EnemyService *service.EnemyService
+	UserService *service.UserListService
 }
 
 var entryCount = uint32(0)
 
-func (BattleController) EnterBattle(context.Context, *rpc.EnterRequest) (*rpc.EnterResponse, error) {
+func (controller BattleController) EnterBattle(ctx context.Context, request *rpc.EnterRequest) (*rpc.EnterResponse, error) {
 	entryCount = entryCount + 1
 	var enter = &rpc.Enter{EnterId: entryCount}
+	var user = &rpc.User{} //ToDO: DBから登録済みユーザーを取得
+	user.Id = &rpc.UserId{UserId:uuid.New().String()}
+	user.UserName = request.UserName
 
-	log.Printf("%d", entryCount)
+	controller.UserService.EnterUser(enter, user)
+
+	log.Printf("enterId: %d, userName: %s", entryCount, user.UserName)
 
 	return &rpc.EnterResponse{Enter: enter}, nil
 }
 
 func (controller BattleController) Connect(request *rpc.ConnectionRequest, stream rpc.BattleService_ConnectServer) error {
-	//ToDO: ConnectionRequestCheck
 	for {
 		time.Sleep(1 * time.Second)
 
-		if false { // ToDo CheckConnectionBreak
+		if !controller.UserService.CheckExist(request.Enter) {
 			break
 		}
 		if false { //ToDo CheckDiff Also Check Dirty
@@ -44,6 +50,11 @@ func (controller BattleController) Connect(request *rpc.ConnectionRequest, strea
 	return nil
 }
 
+func (controller BattleController) Exit(ctx context.Context, request *rpc.ExitRequest) (*rpc.ExitResponse, error) {
+	controller.UserService.DeleteUser(request.Enter)
+	return &rpc.ExitResponse{Result:rpc.ResultCode_SUCCESS}, nil
+}
+
 func (controller BattleController) Attack(stream rpc.BattleService_AttackServer) error {
 	for {
 		var attackRequest, err = stream.Recv()
@@ -55,12 +66,34 @@ func (controller BattleController) Attack(stream rpc.BattleService_AttackServer)
 			return err
 		}
 
-		//ToDo: AttackRequestCheck
+		if !controller.UserService.CheckExist(attackRequest.Attack.Enter) {
+			continue
+		}
+
 		err = controller.EnemyService.AttackEnemy(attackRequest.Attack)
 		if err != nil {
 			log.Printf("Error:%s", err)
 		}
 	}
+}
+
+func (controller BattleController) ReceiveUsers(request *rpc.ConnectionRequest, stream rpc.BattleService_ReceiveUsersServer) error {
+	for {
+		time.Sleep(1 * time.Second)
+
+		if !controller.UserService.CheckExist(request.Enter) {
+			break
+		}
+		if false { //ToDo CheckDiff Also Check Dirty
+			continue
+		}
+		userList, _ := controller.UserService.GetUserList()
+		var situation = &rpc.UserList{UserMap:userList}
+		if err := stream.Send(situation); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 var _ rpc.BattleServiceServer = (*BattleController)(nil)

@@ -26,31 +26,51 @@ namespace M3Online.Grpc.BattleService {
           string.Concat(
             "ChxzZXJ2aWNlL2JhdHRsZV9zZXJ2aWNlLnByb3RvGhJkb21haW4vZW50ZXIu",
             "cHJvdG8aEmRvbWFpbi9lbmVteS5wcm90bxoTZG9tYWluL2F0dGFjay5wcm90",
-            "byIgCgxFbnRlclJlcXVlc3QSEAoIYmF0dGxlSWQYASABKAkiJgoNRW50ZXJS",
-            "ZXNwb25zZRIVCgVlbnRlchgBIAEoCzIGLkVudGVyIj0KEUNvbm5lY3Rpb25S",
-            "ZXF1ZXN0EhEKCXVzZXJfbmFtZRgBIAEoCRIVCgVlbnRlchgCIAEoCzIGLkVu",
-            "dGVyIicKDkVuZW15U2l0dWF0aW9uEhUKBWVuZW15GAEgASgLMgYuRW5lbXki",
-            "KAoNQXR0YWNrUmVxdWVzdBIXCgZhdHRhY2sYASABKAsyBy5BdHRhY2siJQoO",
-            "U2Vzc2lvblN1bW1hcnkSEwoLdG90YWxBdHRhY2sYASABKAUyogEKDUJhdHRs",
-            "ZVNlcnZpY2USLgoLRW50ZXJCYXR0bGUSDS5FbnRlclJlcXVlc3QaDi5FbnRl",
-            "clJlc3BvbnNlIgASMgoHQ29ubmVjdBISLkNvbm5lY3Rpb25SZXF1ZXN0Gg8u",
-            "RW5lbXlTaXR1YXRpb24iADABEi0KBkF0dGFjaxIOLkF0dGFja1JlcXVlc3Qa",
-            "Dy5TZXNzaW9uU3VtbWFyeSIAKAFCLFoMbTNvbmxpbmUvcnBjqgIbTTNPbmxp",
-            "bmUuR3JwYy5CYXR0bGVTZXJ2aWNlYgZwcm90bzM="));
+            "bxoRZG9tYWluL3VzZXIucHJvdG8iMwoMRW50ZXJSZXF1ZXN0EhAKCGJhdHRs",
+            "ZUlkGAEgASgJEhEKCXVzZXJfbmFtZRgCIAEoCSImCg1FbnRlclJlc3BvbnNl",
+            "EhUKBWVudGVyGAEgASgLMgYuRW50ZXIiKgoRQ29ubmVjdGlvblJlcXVlc3QS",
+            "FQoFZW50ZXIYASABKAsyBi5FbnRlciInCg5FbmVteVNpdHVhdGlvbhIVCgVl",
+            "bmVteRgBIAEoCzIGLkVuZW15IigKDUF0dGFja1JlcXVlc3QSFwoGYXR0YWNr",
+            "GAEgASgLMgcuQXR0YWNrIiUKDlNlc3Npb25TdW1tYXJ5EhMKC3RvdGFsQXR0",
+            "YWNrGAEgASgFImsKCFVzZXJMaXN0EigKCHVzZXJfbWFwGAEgAygLMhYuVXNl",
+            "ckxpc3QuVXNlck1hcEVudHJ5GjUKDFVzZXJNYXBFbnRyeRILCgNrZXkYASAB",
+            "KA0SFAoFdmFsdWUYAiABKAsyBS5Vc2VyOgI4ASIkCgtFeGl0UmVxdWVzdBIV",
+            "CgVlbnRlchgBIAEoCzIGLkVudGVyIisKDEV4aXRSZXNwb25zZRIbCgZyZXN1",
+            "bHQYASABKA4yCy5SZXN1bHRDb2RlKjEKClJlc3VsdENvZGUSCwoHVU5LTk9X",
+            "ThAAEgsKB1NVQ0NFU1MQARIJCgVFUlJPUhACMvwBCg1CYXR0bGVTZXJ2aWNl",
+            "Ei4KC0VudGVyQmF0dGxlEg0uRW50ZXJSZXF1ZXN0Gg4uRW50ZXJSZXNwb25z",
+            "ZSIAEjIKB0Nvbm5lY3QSEi5Db25uZWN0aW9uUmVxdWVzdBoPLkVuZW15U2l0",
+            "dWF0aW9uIgAwARItCgZBdHRhY2sSDi5BdHRhY2tSZXF1ZXN0Gg8uU2Vzc2lv",
+            "blN1bW1hcnkiACgBEjEKDFJlY2VpdmVVc2VycxISLkNvbm5lY3Rpb25SZXF1",
+            "ZXN0GgkuVXNlckxpc3QiADABEiUKBEV4aXQSDC5FeGl0UmVxdWVzdBoNLkV4",
+            "aXRSZXNwb25zZSIAQixaDG0zb25saW5lL3JwY6oCG00zT25saW5lLkdycGMu",
+            "QmF0dGxlU2VydmljZWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::M3Online.Domain.Enter.EnterReflection.Descriptor, global::M3Online.Domain.Enemy.EnemyReflection.Descriptor, global::M3Online.Domain.Attack.AttackReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.EnterRequest), global::M3Online.Grpc.BattleService.EnterRequest.Parser, new[]{ "BattleId" }, null, null, null),
+          new pbr::FileDescriptor[] { global::M3Online.Domain.Enter.EnterReflection.Descriptor, global::M3Online.Domain.Enemy.EnemyReflection.Descriptor, global::M3Online.Domain.Attack.AttackReflection.Descriptor, global::M3Online.Domain.User.UserReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::M3Online.Grpc.BattleService.ResultCode), }, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.EnterRequest), global::M3Online.Grpc.BattleService.EnterRequest.Parser, new[]{ "BattleId", "UserName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.EnterResponse), global::M3Online.Grpc.BattleService.EnterResponse.Parser, new[]{ "Enter" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.ConnectionRequest), global::M3Online.Grpc.BattleService.ConnectionRequest.Parser, new[]{ "UserName", "Enter" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.ConnectionRequest), global::M3Online.Grpc.BattleService.ConnectionRequest.Parser, new[]{ "Enter" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.EnemySituation), global::M3Online.Grpc.BattleService.EnemySituation.Parser, new[]{ "Enemy" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.AttackRequest), global::M3Online.Grpc.BattleService.AttackRequest.Parser, new[]{ "Attack" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.SessionSummary), global::M3Online.Grpc.BattleService.SessionSummary.Parser, new[]{ "TotalAttack" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.SessionSummary), global::M3Online.Grpc.BattleService.SessionSummary.Parser, new[]{ "TotalAttack" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.UserList), global::M3Online.Grpc.BattleService.UserList.Parser, new[]{ "UserMap" }, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.ExitRequest), global::M3Online.Grpc.BattleService.ExitRequest.Parser, new[]{ "Enter" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::M3Online.Grpc.BattleService.ExitResponse), global::M3Online.Grpc.BattleService.ExitResponse.Parser, new[]{ "Result" }, null, null, null)
           }));
     }
     #endregion
 
   }
+  #region Enums
+  public enum ResultCode {
+    [pbr::OriginalName("UNKNOWN")] Unknown = 0,
+    [pbr::OriginalName("SUCCESS")] Success = 1,
+    [pbr::OriginalName("ERROR")] Error = 2,
+  }
+
+  #endregion
+
   #region Messages
   public sealed partial class EnterRequest : pb::IMessage<EnterRequest> {
     private static readonly pb::MessageParser<EnterRequest> _parser = new pb::MessageParser<EnterRequest>(() => new EnterRequest());
@@ -78,6 +98,7 @@ namespace M3Online.Grpc.BattleService {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public EnterRequest(EnterRequest other) : this() {
       battleId_ = other.battleId_;
+      userName_ = other.userName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -97,6 +118,17 @@ namespace M3Online.Grpc.BattleService {
       }
     }
 
+    /// <summary>Field number for the "user_name" field.</summary>
+    public const int UserNameFieldNumber = 2;
+    private string userName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string UserName {
+      get { return userName_; }
+      set {
+        userName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as EnterRequest);
@@ -111,6 +143,7 @@ namespace M3Online.Grpc.BattleService {
         return true;
       }
       if (BattleId != other.BattleId) return false;
+      if (UserName != other.UserName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -118,6 +151,7 @@ namespace M3Online.Grpc.BattleService {
     public override int GetHashCode() {
       int hash = 1;
       if (BattleId.Length != 0) hash ^= BattleId.GetHashCode();
+      if (UserName.Length != 0) hash ^= UserName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -135,6 +169,10 @@ namespace M3Online.Grpc.BattleService {
         output.WriteRawTag(10);
         output.WriteString(BattleId);
       }
+      if (UserName.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(UserName);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -145,6 +183,9 @@ namespace M3Online.Grpc.BattleService {
       int size = 0;
       if (BattleId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(BattleId);
+      }
+      if (UserName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -160,6 +201,9 @@ namespace M3Online.Grpc.BattleService {
       if (other.BattleId.Length != 0) {
         BattleId = other.BattleId;
       }
+      if (other.UserName.Length != 0) {
+        UserName = other.UserName;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -173,6 +217,10 @@ namespace M3Online.Grpc.BattleService {
             break;
           case 10: {
             BattleId = input.ReadString();
+            break;
+          }
+          case 18: {
+            UserName = input.ReadString();
             break;
           }
         }
@@ -341,7 +389,6 @@ namespace M3Online.Grpc.BattleService {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ConnectionRequest(ConnectionRequest other) : this() {
-      userName_ = other.userName_;
       enter_ = other.enter_ != null ? other.enter_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -351,19 +398,8 @@ namespace M3Online.Grpc.BattleService {
       return new ConnectionRequest(this);
     }
 
-    /// <summary>Field number for the "user_name" field.</summary>
-    public const int UserNameFieldNumber = 1;
-    private string userName_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string UserName {
-      get { return userName_; }
-      set {
-        userName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     /// <summary>Field number for the "enter" field.</summary>
-    public const int EnterFieldNumber = 2;
+    public const int EnterFieldNumber = 1;
     private global::M3Online.Domain.Enter.Enter enter_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::M3Online.Domain.Enter.Enter Enter {
@@ -386,7 +422,6 @@ namespace M3Online.Grpc.BattleService {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (UserName != other.UserName) return false;
       if (!object.Equals(Enter, other.Enter)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -394,7 +429,6 @@ namespace M3Online.Grpc.BattleService {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (UserName.Length != 0) hash ^= UserName.GetHashCode();
       if (enter_ != null) hash ^= Enter.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -409,12 +443,8 @@ namespace M3Online.Grpc.BattleService {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (UserName.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(UserName);
-      }
       if (enter_ != null) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(10);
         output.WriteMessage(Enter);
       }
       if (_unknownFields != null) {
@@ -425,9 +455,6 @@ namespace M3Online.Grpc.BattleService {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (UserName.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserName);
-      }
       if (enter_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Enter);
       }
@@ -441,9 +468,6 @@ namespace M3Online.Grpc.BattleService {
     public void MergeFrom(ConnectionRequest other) {
       if (other == null) {
         return;
-      }
-      if (other.UserName.Length != 0) {
-        UserName = other.UserName;
       }
       if (other.enter_ != null) {
         if (enter_ == null) {
@@ -463,10 +487,6 @@ namespace M3Online.Grpc.BattleService {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            UserName = input.ReadString();
-            break;
-          }
-          case 18: {
             if (enter_ == null) {
               Enter = new global::M3Online.Domain.Enter.Enter();
             }
@@ -870,6 +890,394 @@ namespace M3Online.Grpc.BattleService {
             break;
           case 8: {
             TotalAttack = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class UserList : pb::IMessage<UserList> {
+    private static readonly pb::MessageParser<UserList> _parser = new pb::MessageParser<UserList>(() => new UserList());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<UserList> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::M3Online.Grpc.BattleService.BattleServiceReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserList() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserList(UserList other) : this() {
+      userMap_ = other.userMap_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public UserList Clone() {
+      return new UserList(this);
+    }
+
+    /// <summary>Field number for the "user_map" field.</summary>
+    public const int UserMapFieldNumber = 1;
+    private static readonly pbc::MapField<uint, global::M3Online.Domain.User.User>.Codec _map_userMap_codec
+        = new pbc::MapField<uint, global::M3Online.Domain.User.User>.Codec(pb::FieldCodec.ForUInt32(8), pb::FieldCodec.ForMessage(18, global::M3Online.Domain.User.User.Parser), 10);
+    private readonly pbc::MapField<uint, global::M3Online.Domain.User.User> userMap_ = new pbc::MapField<uint, global::M3Online.Domain.User.User>();
+    /// <summary>
+    ///KeyはEnter.EnterId
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::MapField<uint, global::M3Online.Domain.User.User> UserMap {
+      get { return userMap_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as UserList);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(UserList other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!UserMap.Equals(other.UserMap)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= UserMap.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      userMap_.WriteTo(output, _map_userMap_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += userMap_.CalculateSize(_map_userMap_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(UserList other) {
+      if (other == null) {
+        return;
+      }
+      userMap_.Add(other.userMap_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            userMap_.AddEntriesFrom(input, _map_userMap_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ExitRequest : pb::IMessage<ExitRequest> {
+    private static readonly pb::MessageParser<ExitRequest> _parser = new pb::MessageParser<ExitRequest>(() => new ExitRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ExitRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::M3Online.Grpc.BattleService.BattleServiceReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ExitRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ExitRequest(ExitRequest other) : this() {
+      enter_ = other.enter_ != null ? other.enter_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ExitRequest Clone() {
+      return new ExitRequest(this);
+    }
+
+    /// <summary>Field number for the "enter" field.</summary>
+    public const int EnterFieldNumber = 1;
+    private global::M3Online.Domain.Enter.Enter enter_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::M3Online.Domain.Enter.Enter Enter {
+      get { return enter_; }
+      set {
+        enter_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ExitRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ExitRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Enter, other.Enter)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (enter_ != null) hash ^= Enter.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (enter_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Enter);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (enter_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Enter);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ExitRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.enter_ != null) {
+        if (enter_ == null) {
+          Enter = new global::M3Online.Domain.Enter.Enter();
+        }
+        Enter.MergeFrom(other.Enter);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (enter_ == null) {
+              Enter = new global::M3Online.Domain.Enter.Enter();
+            }
+            input.ReadMessage(Enter);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ExitResponse : pb::IMessage<ExitResponse> {
+    private static readonly pb::MessageParser<ExitResponse> _parser = new pb::MessageParser<ExitResponse>(() => new ExitResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ExitResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::M3Online.Grpc.BattleService.BattleServiceReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ExitResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ExitResponse(ExitResponse other) : this() {
+      result_ = other.result_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ExitResponse Clone() {
+      return new ExitResponse(this);
+    }
+
+    /// <summary>Field number for the "result" field.</summary>
+    public const int ResultFieldNumber = 1;
+    private global::M3Online.Grpc.BattleService.ResultCode result_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::M3Online.Grpc.BattleService.ResultCode Result {
+      get { return result_; }
+      set {
+        result_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ExitResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ExitResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Result != other.Result) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Result != 0) hash ^= Result.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Result != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Result);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Result != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Result);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ExitResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Result != 0) {
+        Result = other.Result;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Result = (global::M3Online.Grpc.BattleService.ResultCode) input.ReadEnum();
             break;
           }
         }
