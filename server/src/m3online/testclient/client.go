@@ -27,23 +27,29 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Hour)
 	defer cancel()
 
-	enterBattle(c, ctx)
+	var enter = enterBattle(c, ctx)
 
-	go connectBattle(c, ctx)
+	go connectBattle(c, ctx, enter)
+	go getUserList(c, ctx, enter)
 
-	attackEnemy(c, ctx)
+	attackEnemy(c, ctx, enter)
 }
 
-func enterBattle(client pb.BattleServiceClient, ctx context.Context) {
-	r, err := client.EnterBattle(ctx, &pb.EnterRequest{BattleId: "hogehgoehgoehge"})
+func enterBattle(client pb.BattleServiceClient, ctx context.Context) *pb.Enter {
+	stdin := bufio.NewScanner(os.Stdin)
+	stdin.Scan()
+
+	r, err := client.EnterBattle(ctx, &pb.EnterRequest{BattleId: "hogehgoehgoehge", UserName: stdin.Text()})
 	if err != nil {
 		log.Fatalf("err: %v", err)
 	}
 	log.Printf("EntryCount: %d", r.Enter.EnterId)
+
+	return r.Enter
 }
 
-func connectBattle(client pb.BattleServiceClient, ctx context.Context) {
-	stream, err := client.Connect(ctx, &pb.ConnectionRequest{})
+func connectBattle(client pb.BattleServiceClient, ctx context.Context, enter *pb.Enter) {
+	stream, err := client.Connect(ctx, &pb.ConnectionRequest{Enter: enter})
 
 	if err != nil {
 		log.Fatalf("%v.ConnectBattle(_) = _, %v", client, err)
@@ -60,7 +66,25 @@ func connectBattle(client pb.BattleServiceClient, ctx context.Context) {
 	}
 }
 
-func attackEnemy(client pb.BattleServiceClient, ctx context.Context) {
+func getUserList(client pb.BattleServiceClient, ctx context.Context, enter *pb.Enter) {
+	stream, err := client.ReceiveUsers(ctx, &pb.ConnectionRequest{Enter: enter})
+
+	if err != nil {
+		log.Fatalf("%v.ReceiveUsers(_) = _, %v", client, err)
+	}
+	for {
+		userList, err := stream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("%v.UserList(_) = _, %v", client, err)
+		}
+		log.Println(userList)
+	}
+}
+
+func attackEnemy(client pb.BattleServiceClient, ctx context.Context, enter *pb.Enter) {
 
 	stream, err := client.Attack(ctx)
 	if err != nil {
@@ -68,9 +92,13 @@ func attackEnemy(client pb.BattleServiceClient, ctx context.Context) {
 	}
 	stdin := bufio.NewScanner(os.Stdin)
 	for stdin.Scan() {
-		_ = stdin.Text()
+		var text = stdin.Text()
 
-		var request = &pb.AttackRequest{}
+		if text == "quit" {
+			break
+		}
+
+		var request = &pb.AttackRequest{Attack: &pb.Attack{Enter: enter}}
 		if err := stream.Send(request); err != nil {
 			log.Fatalf("%v.Send(%v) = %v", stream, request, err)
 		}
@@ -81,4 +109,10 @@ func attackEnemy(client pb.BattleServiceClient, ctx context.Context) {
 		log.Fatalf("%v.CloseAndRecv() got error %v, want %v", stream, err, nil)
 	}
 	log.Printf("Route summary: %v", reply)
+
+	r, err := client.Exit(ctx, &pb.ExitRequest{Enter: enter})
+	if err != nil {
+		log.Fatalf("err: %v", err)
+	}
+	log.Printf("ExistResult: %s", r.Result.String())
 }
