@@ -1,8 +1,13 @@
 package service
 
-import "m3online/rpc"
+import (
+	"m3online/rpc"
+	"time"
+)
 
 var currentEnemy = rpc.Enemy{}
+var isDirty = false
+var connectStream = map[*rpc.Enter]*rpc.BattleService_ConnectServer{}
 
 const (
 	masterId   = 0
@@ -21,8 +26,45 @@ func (EnemyService) Initialize() error {
 	return nil
 }
 
-func (EnemyService) GetEnemy() (*rpc.Enemy, error) {
-	return &currentEnemy, nil
+func (service EnemyService) Update() error {
+
+	for {
+		time.Sleep(1 / 10 * time.Second)
+
+		if isDirty {
+			isDirty = false
+			situation := &rpc.EnemySituation{Enemy: &currentEnemy}
+			for key, stream := range connectStream {
+				var err = (*stream).Send(situation)
+
+				if err != nil {
+					delete(connectStream, key)
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
+func getCurrentSituation() rpc.EnemySituation {
+
+}
+
+func (EnemyService) Register(enter *rpc.Enter, stream *rpc.BattleService_ConnectServer) {
+	connectStream[enter] = stream
+}
+
+func (EnemyService) AttackEnemy(attack *rpc.Attack) error {
+
+	currentEnemy.Hp = currentEnemy.Hp - 1
+
+	if currentEnemy.Hp <= 0 {
+		currentEnemy, _ = createEnemy()
+	}
+
+	isDirty = true
+	return nil
 }
 
 func createEnemy() (rpc.Enemy, error) {
@@ -34,13 +76,3 @@ func createEnemy() (rpc.Enemy, error) {
 	return enemy, nil
 }
 
-func (EnemyService) AttackEnemy(attack *rpc.Attack) error {
-
-	currentEnemy.Hp = currentEnemy.Hp - 1
-
-	if currentEnemy.Hp <= 0 {
-		currentEnemy, _ = createEnemy()
-	}
-
-	return nil
-}

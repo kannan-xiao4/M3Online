@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/testdata"
 
-	controller "m3online/controller"
+	"m3online/controller"
 	pb "m3online/rpc"
 )
 
@@ -26,12 +26,13 @@ func serialize(enter *pb.Enter) string {
 	return fmt.Sprintf("%d", enter.EnterId)
 }
 
-func newServer() *controller.BattleController {
+func newBattleServer() *controller.BattleController {
 	var es = &service.EnemyService{}
 	es.Initialize()
 	var us = &service.UserListService{}
 
 	s := &controller.BattleController{EnemyService: es, UserService: us}
+
 	return s
 }
 
@@ -56,6 +57,6 @@ func main() {
 		opts = []grpc.ServerOption{grpc.Creds(creds)}
 	}
 	grpcServer := grpc.NewServer(opts...)
-	pb.RegisterBattleServiceServer(grpcServer, newServer())
+	pb.RegisterBattleServiceServer(grpcServer, newBattleServer())
 	grpcServer.Serve(lis)
 }
